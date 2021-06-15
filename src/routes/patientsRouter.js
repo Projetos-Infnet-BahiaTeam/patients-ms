@@ -19,6 +19,19 @@ patientsRouter.get("/", async (req, res) => {
   }
 });
 
+patientsRouter.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const patient = await Patient.findById({ id });
+
+    if (!patient) return res.json({ message: "Patient not found." });
+
+    return res.json(patient);
+  } catch (err) {
+    return res.status(err.statusCode).json({ error: err.message });
+  }
+});
+
 patientsRouter.post("/", async (req, res) => {
   try {
     const { nome, cpf, celular, email, sexo, dt_nasc } = req.body;
