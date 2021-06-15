@@ -4,6 +4,6 @@ import patientsRouter from "./patientsRouter";
 
 const routes = Router();
 
-routes.use("/patients", patientsRouter);
+routes.use("/api/patients", patientsRouter);
 
 export default routes;
