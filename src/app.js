@@ -1,7 +1,8 @@
-import express from 'express';
-import routes from './routes';
+import express from "express";
+import cors from "cors";
 
-import './database';
+import routes from "./routes";
+import "./database";
 
 class App {
   constructor() {
@@ -13,6 +14,14 @@ class App {
 
   middlewares() {
     this.server.use(express.json());
+
+    this.server.use((req, res, next) => {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+      res.header("Access-Control-Allow-Headers", "X-PINGOTHER, Content-Type");
+      this.server.use(cors());
+      next();
+    });
   }
 
   routes() {
