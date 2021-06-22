@@ -9,7 +9,7 @@ const patientsRouter = Router();
 
 patientsRouter.get("/", async (req, res) => {
   try {
-    const patients = await Patient.find({});
+    const patients = await Patient.find();
 
     if (!patients) return res.json({ message: "Empty database." });
 
@@ -22,7 +22,8 @@ patientsRouter.get("/", async (req, res) => {
 patientsRouter.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const patient = await Patient.findById({ id });
+    const patient = await Patient.findById(id);
+    console.log(patient);
 
     if (!patient) return res.json({ message: "Patient not found." });
 
@@ -58,7 +59,7 @@ patientsRouter.delete("/:id", async (req, res) => {
     const DeletePatient = new DeletePatientService();
     await DeletePatient.execute(id);
 
-    return res.json({ message: "Paciente deletada com sucesso" });
+    return res.json({ message: "Paciente deletado com sucesso" });
   } catch (err) {
     return res.status(err.statusCode).json({ error: err.message });
   }

@@ -5,7 +5,7 @@ class DeletePatientService {
   async execute(id) {
     const patient = await Patient.findById(id);
 
-    if (!patient) throw new AppError("Consulta não existe", 400);
+    if (!patient) throw new AppError("Paciente não existe", 400);
 
     await Patient.deleteOne(patient);
 
